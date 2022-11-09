@@ -1,6 +1,5 @@
 # introToProgrammingFinalProject
 
-# introToProgrammingFinalProjectP1
 # Project Title
 
 Simple overview of use/purpose.
