@@ -1,12 +1,14 @@
 # introToProgrammingFinalProject
 
 # Project Title
+BCP Student Data Scraper
+
 
 Simple overview of use/purpose.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Gets Student name and picture from b.bcp.org
 
 ## Getting Started
 
