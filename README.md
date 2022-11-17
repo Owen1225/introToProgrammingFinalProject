@@ -1,14 +1,14 @@
 # introToProgrammingFinalProject
 
 # Project Title
-BCP Student Data Scraper
+2D game
 
 
 Simple overview of use/purpose.
 
 ## Description
 
-Gets Student name and picture from b.bcp.org
+2d pixel game
 
 ## Getting Started
 
