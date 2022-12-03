@@ -9,8 +9,8 @@ YELLOW = (255,255,0)
 ORANGE = (255, 98, 0)
 
 #game settings
-WIDTH = 2048
-HEIGHT = 1536
+WIDTH = 516
+HEIGHT = 768
 FPS = 60
 TITLE = "A 2D WORLD"
 

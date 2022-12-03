@@ -12,7 +12,7 @@ class Game:
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
-        pg.key.set_repeat(500, 100)
+        pg.key.set_repeat(300, 100)
         self.load_data()
 
     def load_data(self):
@@ -45,25 +45,26 @@ class Game:
 
     def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
+            pg.draw.line(self.screen, WHITE, (x, 0), (x, HEIGHT))
         for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
+            pg.draw.line(self.screen, WHITE, (0, y), (WIDTH, y))
 
     def draw(self):
-        self.screen.fill(BGCOLOR)
+        self.screen.fill(BLACK)
         self.draw_grid()
         self.all_sprites.draw(self.screen)
         pg.display.flip()
 
     def events(self):
         # catch all events here
+        keys = pg.key.get_pressed()
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.quit()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
-                if event.key == pg.K_LEFT:
+                if event.key == pg.K_LEFT :
                     self.player.move(dx=-1)
                 if event.key == pg.K_RIGHT:
                     self.player.move(dx=1)
