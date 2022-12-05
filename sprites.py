@@ -24,7 +24,6 @@ class Player(pg.sprite.Sprite):
             self.x += dx
             self.y += dy
 
-
     def update(self):
         self.rect.x = self.x * TILESIZE
         self.rect.y = self.y * TILESIZE
