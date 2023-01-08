@@ -27,7 +27,7 @@ class Player(pg.sprite.Sprite):
         self.x = x * TILESIZE
         self.y = y * TILESIZE
         
-
+#defining movement keys
     def get_keys(self): 
         self.vx, self.vy = 0, 0
         keys = pg.key.get_pressed()
