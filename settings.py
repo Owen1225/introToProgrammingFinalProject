@@ -15,7 +15,7 @@ ORANGE = (255, 98, 0)
 WIDTH = 1024
 HEIGHT = 768
 FPS = 60
-TITLE = "A 2D WORLD"
+TITLE = "Get to the Bottom"
 
 
 TILESIZE = 16
