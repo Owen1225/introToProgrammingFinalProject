@@ -6,6 +6,23 @@ import sys
 from settings import *
 from os import path
 from sprites import *
+from tilemap import *
+from time import *
+
+pg.init()
+
+#setting a counting device 
+myfont = pg.font.SysFont("monospace", 25)
+label = myfont.render("countdown", 1, (0,0,0))
+screen.blit(label, (100, 100))
+
+pg.display.flip()
+
+# def cronos():
+#     clock = pg.time.Clock()
+#     minutes = 0
+#     seconds = 0
+#     milliseconds = 0
 
 #creating game class
 class Game:
@@ -20,34 +37,51 @@ class Game:
 
 #loading the data from the map.txt file to make it a map
     def load_data(self):
-        print('poop')
+        # print('poop')
         game_folder = path.dirname(__file__)
-        self.map_data = []
-        #looping through list (map.txt file) to see index
-        with open(path.join(game_folder, 'map.txt'), 'rt') as map:
-            for line in map: 
-                self.map_data.append(line)
+        self.map = Map(path.join(game_folder, 'map.txt'))
 
     def new(self):
         # initialize all variables and do all the setup for a new game
         self.all_sprites = pg.sprite.Group()
         self.walls = pg.sprite.Group()
+        self.endblock = pg.sprite.Group()
         self.player = Player(self, 10, 10)
         #going through list and seeing what it is
         #if the index is a 1, it will spawn a wall at that column and row placement
-        for row, tiles in enumerate(self.map_data):
+        for row, tiles in enumerate(self.map.data):
             for col, tile in enumerate(tiles): 
                 if tile == '1':
                     Wall(self, col, row)
+                if tile == '2': 
+                    EndBlock(self, col, row)
+        self.camera = Camera(self.map.width, self.map.height)
 
     def run(self):
         # game loop - set self.playing = False to end the game
+        clock = pg.time.Clock()
+        minutes = 0
+        seconds = 0
+        milliseconds = 0
         self.playing = True
         while self.playing:
+            timelabel = myfont.render("{}:{}".format(minutes, seconds), 1, (0,0,0))
+            screen.blit(timelabel, (200, 100))
             self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
             self.draw()
+       
+        if milliseconds > 1000:
+            seconds += 1
+            milliseconds -= 1000
+        if seconds > 60:
+            minutes += 1
+            seconds -= 60
+
+        print ("{}:{}".format(minutes, seconds))
+
+        milliseconds += clock.tick_busy_loop(60)
 
     def quit(self):
         pg.quit()
@@ -56,6 +90,8 @@ class Game:
     def update(self):
         # update portion of the game loop
         self.all_sprites.update()
+        self.camera.update(self.player)
+        
 
 #drawing the background grid
     def draw_grid(self):
@@ -68,7 +104,8 @@ class Game:
     def draw(self):
         self.screen.fill(BLACK)
         self.draw_grid()
-        self.all_sprites.draw(self.screen)
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.image, self.camera.apply(sprite))
         pg.display.flip()
 
     def events(self):
@@ -80,14 +117,7 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.quit()
-                if event.key == pg.K_LEFT :
-                    self.player.move(dx=-1)
-                if event.key == pg.K_RIGHT:
-                    self.player.move(dx=1)
-                if event.key == pg.K_UP:
-                    self.player.move(dy=-1)
-                if event.key == pg.K_DOWN:
-                    self.player.move(dy=1)
+
 
     def show_start_screen(self):
         pass

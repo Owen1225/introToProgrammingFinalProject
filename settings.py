@@ -24,12 +24,9 @@ GRIDHEIGHT = HEIGHT / TILESIZE
 
 
 
-# # Player settings
-# PLAYER_HEALTH = 100
-# PLAYER_SPEED = 280
-# PLAYER_ROT_SPEED = 200
-# PLAYER_IMG = 'manBlue_gun.png'
-# PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
+# Player settings
+PLAYER_SPEED = 200
+
 
 
 
